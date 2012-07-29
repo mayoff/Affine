@@ -99,7 +99,7 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC44NjY2NjY2NjY3IDAuNzMzMzMzMzMzMyAwLjQxOTYwNzg0MzEAA</bytes>
+							<bytes key="NSRGB">MSAwLjg1NDU4OTgzNyAwLjYzNDA2MjY3NzUAA</bytes>
 						</object>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -261,6 +261,7 @@
 						<string key="NSFrame">{{20, 918}, {272, 30}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -937,6 +938,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">demoViewWasDoubleTapped:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">demoViewWasDoubleTapped:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">demoViewWasDoubleTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="allowScalingSwitch_">UISwitch</string>
 						<string key="allowShearingSwitch_">UISwitch</string>

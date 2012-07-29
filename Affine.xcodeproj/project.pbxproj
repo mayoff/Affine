@@ -101,6 +101,7 @@
 		31C686C115C476490075B924 /* Affine */ = {
 			isa = PBXGroup;
 			children = (
+				31FF79FB15C4F01100260FDF /* Model */,
 				31BEE64A15C48A300000B4FF /* Picture.jpg */,
 				31C686CA15C476490075B924 /* AppDelegate.h */,
 				31C686CB15C476490075B924 /* AppDelegate.m */,
@@ -113,7 +114,6 @@
 				31C686C215C476490075B924 /* Supporting Files */,
 				31BEE65315C4993C0000B4FF /* UIView+translate.h */,
 				31BEE65415C4993C0000B4FF /* UIView+translate.m */,
-				31FF79FB15C4F01100260FDF /* Model */,
 			);
 			path = Affine;
 			sourceTree = "<group>";
