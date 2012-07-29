@@ -70,10 +70,11 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     }
 }
 
-- (void)setPreset:(CGAffineTransform)transform atIndex:(NSUInteger)index {
-    switch (index) {
-        case 0: self.preset0 = transform; break;
-        default: self.preset1 = transform; break;
+- (void)setCurrentPresetToTransform:(CGAffineTransform)transform {
+    if (_interpolationAbscissa == 0.0f) {
+        self.preset0 = transform;
+    } else if (_interpolationAbscissa == 1.0f) {
+        self.preset1 = transform;
     }
 }
 
@@ -108,6 +109,17 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 }
 
 - (void)notifyObservers {
+    BOOL interpolatedTransformDidChange = interpolationAbscissaDidChange_ || preset0DidChange_ || preset1DidChange_;
+    if (interpolatedTransformDidChange) {
+        CGAffineTransform transform = [self interpolatedTransform];
+        [self forEachObserverRespondingToSelector:@selector(model:didChangeInterpolatedTransform:) do:^(id<ModelObserver> observer) {
+            [observer model:self didChangeInterpolatedTransform:transform];
+        }];
+    }
+
+    preset0DidChange_ = NO;
+    preset1DidChange_ = NO;
+    
     if (allowsScalingDidChange_) {
         allowsScalingDidChange_ = NO;
         [self forEachObserverRespondingToSelector:@selector(model:didChangeAllowsScaling:) do:^(id<ModelObserver> observer) {
@@ -126,15 +138,6 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
         interpolationAbscissaDidChange_ = NO;
         [self forEachObserverRespondingToSelector:@selector(model:didChangeInterpolationAbscissa:) do:^(id<ModelObserver> observer) {
             [observer model:self didChangeInterpolationAbscissa:_interpolationAbscissa];
-        }];
-    }
-
-    if (preset0DidChange_ || preset1DidChange_) {
-        preset0DidChange_ = NO;
-        preset1DidChange_ = NO;
-        CGAffineTransform t = self.interpolatedTransform;
-        [self forEachObserverRespondingToSelector:@selector(model:didChangeInterpolatedTransform:) do:^(id<ModelObserver> observer) {
-            [observer model:self didChangeInterpolatedTransform:t];
         }];
     }
 }

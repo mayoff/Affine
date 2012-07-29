@@ -4,7 +4,12 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 */
 
 #import <UIKit/UIKit.h>
+#import "Model.h"
 
-@interface LocatorView : UIView
+@interface LocatorView : UIView <ModelObserver>
+
+- (void)setNeedsAlphaUpdate;
+
+- (BOOL)shouldHideAccordingToModel:(Model *)model;
 
 @end

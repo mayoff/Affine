@@ -6,7 +6,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 #import "ViewController.h"
 #import "Model.h"
 #import "DemoView.h"
-#import "AffinePresetController.h"
+#import "PresetController.h"
 
 @interface ViewController () <ModelObserver>
 
@@ -14,8 +14,8 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 
 @implementation ViewController {
     IBOutlet Model *model_;
-    IBOutlet AffinePresetController *preset0Controller_; // required to keep it from being deallocated
-    IBOutlet AffinePresetController *preset1Controller_; // required to keep it from being deallocated
+    IBOutlet PresetController *preset0Controller_; // required to keep it from being deallocated
+    IBOutlet PresetController *preset1Controller_; // required to keep it from being deallocated
     IBOutlet DemoView *demoView_;
     IBOutlet UISlider *interpolationSlider_;
     IBOutlet UISwitch *allowShearingSwitch_;
@@ -74,6 +74,10 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     allowScalingSwitch_.on = model_.allowsScaling;
     allowShearingSwitch_.on = model_.allowsShearing;
     interpolationSlider_.value = model_.interpolationAbscissa;
+}
+
+- (IBAction)demoViewWasDoubleTapped:(id)sender {
+    [model_ setCurrentPresetToTransform:CGAffineTransformIdentity];
 }
 
 @end

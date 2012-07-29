@@ -15,7 +15,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 @property (nonatomic) CGAffineTransform preset0;
 @property (nonatomic) CGAffineTransform preset1;
 
-- (void)setPreset:(CGAffineTransform)transform atIndex:(NSUInteger)index;
+- (void)setCurrentPresetToTransform:(CGAffineTransform)transform;
 
 @property (nonatomic) CGFloat interpolationAbscissa; // between 0 and 1 inclusive
 
