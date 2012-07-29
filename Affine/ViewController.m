@@ -4,79 +4,76 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 */
 
 #import "ViewController.h"
+#import "Model.h"
 #import "DemoView.h"
 #import "AffinePresetController.h"
 
-@interface ViewController () <DemoViewDelegate>
+@interface ViewController () <ModelObserver>
 
 @end
 
 @implementation ViewController {
-    IBOutlet AffinePresetController *aPreset_;
-    IBOutlet AffinePresetController *bPreset_;
-    AffinePresetController *selectedPreset_;
+    IBOutlet Model *model_;
+    IBOutlet AffinePresetController *preset0Controller_; // required to keep it from being deallocated
+    IBOutlet AffinePresetController *preset1Controller_; // required to keep it from being deallocated
+    IBOutlet DemoView *demoView_;
     IBOutlet UISlider *interpolationSlider_;
-    IBOutlet DemoView *affineView_;
+    IBOutlet UISwitch *allowShearingSwitch_;
+    IBOutlet UISwitch *allowScalingSwitch_;
+    IBOutlet UISegmentedControl *imageFillControl_;
+    BOOL updateControlsIsPending_ : 1;
 }
 
-- (void)viewDidLoad
-{
+#pragma mark - Public API
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-    selectedPreset_ = aPreset_;
-    [self updateControlState];
+    [model_ addModelObserver:self];
+    [self updateControlsFromModel];
 }
 
-- (IBAction)aButtonWasTapped {
-    selectedPreset_ = aPreset_;
-    [self updateControlState];
+- (void)dealloc {
+    [model_ removeModelObserver:self];
 }
 
-- (IBAction)bButtonWasTapped {
-    selectedPreset_ = bPreset_;
-    [self updateControlState];
+#pragma mark - ModelObserver protocol
+
+- (void)model:(Model *)model didChangeAllowsScaling:(BOOL)allowsScaling {
+    [self updateControlsFromModel];
 }
 
-- (IBAction)interpolationSliderValueDidChange {
-    CGFloat value = interpolationSlider_.value;
-    if (value == aPreset_.interpolationValue) {
-        selectedPreset_ = aPreset_;
-    } else if (value == bPreset_.interpolationValue) {
-        selectedPreset_ = bPreset_;
-    } else {
-        selectedPreset_ = nil;
-    }
-    [self updateControlState];
+- (void)model:(Model *)model didChangeAllowsShearing:(BOOL)allowsShearing {
+    [self updateControlsFromModel];
 }
 
-- (void)updateControlState {
-    [aPreset_ setSelectedIfEqualToPreset:selectedPreset_];
-    [bPreset_ setSelectedIfEqualToPreset:selectedPreset_];
-    if (selectedPreset_) {
-        interpolationSlider_.value = selectedPreset_.interpolationValue;
-    }
-    affineView_.demoTransform = [self interpolatedTransform];
-    affineView_.editable = selectedPreset_ != nil;
+- (void)model:(Model *)model didChangeInterpolationAbscissa:(CGFloat)abscissa {
+    [self updateControlsFromModel];
 }
 
-- (void)demoView:(DemoView *)view didChangeDemoTransform:(CGAffineTransform)transform {
-    selectedPreset_.transform = transform;
+#pragma mark - Implementation details
+
+- (IBAction)updateImageFillOptionFromControl {
+    demoView_.imageFill = (ImageFillOption)imageFillControl_.selectedSegmentIndex;
 }
 
-- (CGAffineTransform)interpolatedTransform {
-    CGFloat t = interpolationSlider_.value;
-    CGFloat u = 1.0f - t;
-    CGAffineTransform a = aPreset_.transform;
-    CGAffineTransform b = bPreset_.transform;
-    CGAffineTransform r;
-#define Interpolate(Element) r.Element = u * a.Element + t * b.Element
-    Interpolate(a);
-    Interpolate(b);
-    Interpolate(c);
-    Interpolate(d);
-    Interpolate(tx);
-    Interpolate(ty);
-#undef Interpolate
-    return r;
+-  (IBAction)updateModelFromControls {
+    model_.allowsShearing = allowShearingSwitch_.on;
+    model_.allowsScaling = allowScalingSwitch_.on;
+    model_.interpolationAbscissa = interpolationSlider_.value;
+}
+
+- (void)setControlsNeedUpdating {
+    if (updateControlsIsPending_)
+        return;
+    updateControlsIsPending_ = YES;
+    [self performSelectorOnMainThread:@selector(updateControlsFromModel) withObject:nil waitUntilDone:NO];
+}
+
+- (void)updateControlsFromModel {
+    updateControlsIsPending_ = NO;
+    allowScalingSwitch_.on = model_.allowsScaling;
+    allowShearingSwitch_.on = model_.allowsShearing;
+    interpolationSlider_.value = model_.interpolationAbscissa;
 }
 
 @end

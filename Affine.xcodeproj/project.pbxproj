@@ -21,6 +21,7 @@
 		31C686DA15C479500075B924 /* DemoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C686D915C479500075B924 /* DemoView.m */; };
 		31C686DD15C47D250075B924 /* AffinePresetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C686DC15C47D250075B924 /* AffinePresetController.m */; };
 		31C686E215C4816B0075B924 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C686E115C4816B0075B924 /* QuartzCore.framework */; };
+		31FF79F915C4EE2100260FDF /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF79F815C4EE2100260FDF /* Model.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		31C686DB15C47D250075B924 /* AffinePresetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffinePresetController.h; sourceTree = "<group>"; };
 		31C686DC15C47D250075B924 /* AffinePresetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffinePresetController.m; sourceTree = "<group>"; };
 		31C686E115C4816B0075B924 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		31FF79F715C4EE2100260FDF /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		31FF79F815C4EE2100260FDF /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,7 @@
 				31BEE65115C495440000B4FF /* LocatorView.m */,
 				31BEE65315C4993C0000B4FF /* UIView+translate.h */,
 				31BEE65415C4993C0000B4FF /* UIView+translate.m */,
+				31FF79FB15C4F01100260FDF /* Model */,
 			);
 			path = Affine;
 			sourceTree = "<group>";
@@ -123,6 +127,15 @@
 				31C686C915C476490075B924 /* Affine-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		31FF79FB15C4F01100260FDF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31FF79F715C4EE2100260FDF /* Model.h */,
+				31FF79F815C4EE2100260FDF /* Model.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +209,7 @@
 				31C686DD15C47D250075B924 /* AffinePresetController.m in Sources */,
 				31BEE65215C495440000B4FF /* LocatorView.m in Sources */,
 				31BEE65515C4993C0000B4FF /* UIView+translate.m in Sources */,
+				31FF79F915C4EE2100260FDF /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
