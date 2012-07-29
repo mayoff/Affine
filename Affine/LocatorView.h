@@ -6,7 +6,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 #import <UIKit/UIKit.h>
 #import "Model.h"
 
-@interface LocatorView : UIView <ModelObserver>
+@interface LocatorView : UIImageView <ModelObserver>
 
 - (void)setNeedsAlphaUpdate;
 

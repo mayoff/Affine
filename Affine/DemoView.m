@@ -137,7 +137,7 @@ static const CGFloat kScale = 128.0f;
 
 - (void)drawVector:(CGPoint)vector startingAtPoint:(CGPoint)start {
     CGFloat scale = hypotf(vector.x, vector.y);
-    static const CGFloat kArrowHeadLength = 0.2f;
+    static const CGFloat kArrowHeadLength = 0.15f;
     if (scale < kArrowHeadLength)
         return;
     CGFloat x = 1.0f - kArrowHeadLength / scale;

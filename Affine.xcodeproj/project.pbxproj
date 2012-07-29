@@ -23,6 +23,8 @@
 		31C686E215C4816B0075B924 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C686E115C4816B0075B924 /* QuartzCore.framework */; };
 		31FF79F915C4EE2100260FDF /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF79F815C4EE2100260FDF /* Model.m */; };
 		31FF7A0515C501F500260FDF /* ShearLocatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF7A0415C501F500260FDF /* ShearLocatorView.m */; };
+		31FF7A0E15C5D56800260FDF /* Locator.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A0C15C5D56800260FDF /* Locator.png */; };
+		31FF7A0F15C5D56800260FDF /* Locator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A0D15C5D56800260FDF /* Locator@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,10 @@
 		31FF79F815C4EE2100260FDF /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		31FF7A0315C501F500260FDF /* ShearLocatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShearLocatorView.h; sourceTree = "<group>"; };
 		31FF7A0415C501F500260FDF /* ShearLocatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShearLocatorView.m; sourceTree = "<group>"; };
+		31FF7A0815C5D50900260FDF /* Locator.fx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Locator.fx.png; sourceTree = "<group>"; };
+		31FF7A0B15C5D54C00260FDF /* generic-export.jsf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "generic-export.jsf"; sourceTree = "<group>"; };
+		31FF7A0C15C5D56800260FDF /* Locator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Locator.png; sourceTree = "<group>"; };
+		31FF7A0D15C5D56800260FDF /* Locator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locator@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,10 @@
 		31C686C115C476490075B924 /* Affine */ = {
 			isa = PBXGroup;
 			children = (
+				31FF7A0C15C5D56800260FDF /* Locator.png */,
+				31FF7A0D15C5D56800260FDF /* Locator@2x.png */,
+				31FF7A0B15C5D54C00260FDF /* generic-export.jsf */,
+				31FF7A0815C5D50900260FDF /* Locator.fx.png */,
 				31FF79FB15C4F01100260FDF /* Model */,
 				31BEE64A15C48A300000B4FF /* Picture.jpg */,
 				31C686CA15C476490075B924 /* AppDelegate.h */,
@@ -205,6 +215,8 @@
 				31C686C615C476490075B924 /* InfoPlist.strings in Resources */,
 				31C686D215C476490075B924 /* ViewController.xib in Resources */,
 				31BEE64B15C48A300000B4FF /* Picture.jpg in Resources */,
+				31FF7A0E15C5D56800260FDF /* Locator.png in Resources */,
+				31FF7A0F15C5D56800260FDF /* Locator@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

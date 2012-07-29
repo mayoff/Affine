@@ -1,0 +1,38 @@
+var exportOptions_1 = {
+    colorMode:"32 bit",
+    crop:false,
+    ditherMode:"none",
+    exportFormat:"PNG",
+    name:null,
+    optimized:true,
+    percentScale:100,
+    useScale:true
+};
+
+var exportOptions_2 = {
+    colorMode:"32 bit",
+    crop:false,
+    ditherMode:"none",
+    exportFormat:"PNG",
+    name:null,
+    optimized:true,
+    percentScale:200,
+    useScale:true
+};
+
+var document = fw.getDocumentDOM();
+document.exportSettings.exportFilesStyle = 'Images Only';
+document.exportSettings.exportPageMode = 'current page';
+
+var path = document.filePathForSave;
+if (path.indexOf('@2x') !== -1) {
+    exportOptions_1.percentScale = 50;
+    exportOptions_2.percentScale = 100;
+    path = path.replace('@2x', '');
+}
+var dot = path.lastIndexOf('/');
+dot = path.indexOf('.', dot);
+path = path.substr(0, dot);
+
+document.exportTo(path, exportOptions_1);
+document.exportTo(path + '@2x', exportOptions_2);
