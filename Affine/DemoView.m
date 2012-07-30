@@ -126,12 +126,14 @@ static const CGFloat kScale = 128.0f;
 - (void)drawVectors {
     CGContextRef gc = UIGraphicsGetCurrentContext();
     CGAffineTransform t = model_.interpolatedTransform;
-    [[UIColor blackColor] set];
     CGContextSetLineCap(gc, kCGLineCapSquare);
     CGContextSetLineJoin(gc, kCGLineJoinMiter);
     CGPoint origin = CGPointMake(t.tx, t.ty);
+    [[UIColor orangeColor] set];
     [self drawVector:origin startingAtPoint:CGPointZero];
+    [[UIColor brownColor] set];
     [self drawVector:CGPointMake(t.a, t.b) startingAtPoint:origin];
+    [[UIColor purpleColor] set];
     [self drawVector:CGPointMake(t.c, t.d) startingAtPoint:origin];
 }
 

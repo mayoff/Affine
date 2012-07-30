@@ -6,7 +6,9 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 #import "ViewController.h"
 #import "Model.h"
 #import "DemoView.h"
-#import "PresetController.h"
+
+@class PresetController;
+@class MatrixController;
 
 @interface ViewController () <ModelObserver>
 
@@ -16,6 +18,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     IBOutlet Model *model_;
     IBOutlet PresetController *preset0Controller_; // required to keep it from being deallocated
     IBOutlet PresetController *preset1Controller_; // required to keep it from being deallocated
+    IBOutlet MatrixController *matrixController_; // required to keep it from being deallocated
     IBOutlet DemoView *demoView_;
     IBOutlet UISlider *interpolationSlider_;
     IBOutlet UISwitch *allowShearingSwitch_;

@@ -25,6 +25,10 @@
 		31FF7A0515C501F500260FDF /* ShearLocatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF7A0415C501F500260FDF /* ShearLocatorView.m */; };
 		31FF7A0E15C5D56800260FDF /* Locator.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A0C15C5D56800260FDF /* Locator.png */; };
 		31FF7A0F15C5D56800260FDF /* Locator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A0D15C5D56800260FDF /* Locator@2x.png */; };
+		31FF7A1415C5EAA700260FDF /* Matrix.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A1215C5EAA300260FDF /* Matrix.png */; };
+		31FF7A1515C5EAA700260FDF /* Matrix@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31FF7A1315C5EAA300260FDF /* Matrix@2x.png */; };
+		31FF7A1815C5EADF00260FDF /* MatrixController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF7A1715C5EADF00260FDF /* MatrixController.m */; };
+		31FF7A1B15C5F31200260FDF /* ObserverSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FF7A1A15C5F31100260FDF /* ObserverSet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +63,13 @@
 		31FF7A0B15C5D54C00260FDF /* generic-export.jsf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "generic-export.jsf"; sourceTree = "<group>"; };
 		31FF7A0C15C5D56800260FDF /* Locator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Locator.png; sourceTree = "<group>"; };
 		31FF7A0D15C5D56800260FDF /* Locator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Locator@2x.png"; sourceTree = "<group>"; };
+		31FF7A1115C5EAA300260FDF /* Matrix.fx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Matrix.fx.png; sourceTree = "<group>"; };
+		31FF7A1215C5EAA300260FDF /* Matrix.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Matrix.png; sourceTree = "<group>"; };
+		31FF7A1315C5EAA300260FDF /* Matrix@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Matrix@2x.png"; sourceTree = "<group>"; };
+		31FF7A1615C5EADE00260FDF /* MatrixController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatrixController.h; sourceTree = "<group>"; };
+		31FF7A1715C5EADF00260FDF /* MatrixController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatrixController.m; sourceTree = "<group>"; };
+		31FF7A1915C5F31100260FDF /* ObserverSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverSet.h; sourceTree = "<group>"; };
+		31FF7A1A15C5F31100260FDF /* ObserverSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverSet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +118,8 @@
 		31C686C115C476490075B924 /* Affine */ = {
 			isa = PBXGroup;
 			children = (
-				31FF7A0C15C5D56800260FDF /* Locator.png */,
-				31FF7A0D15C5D56800260FDF /* Locator@2x.png */,
-				31FF7A0B15C5D54C00260FDF /* generic-export.jsf */,
-				31FF7A0815C5D50900260FDF /* Locator.fx.png */,
+				31FF7A1015C5EA9200260FDF /* Graphics */,
 				31FF79FB15C4F01100260FDF /* Model */,
-				31BEE64A15C48A300000B4FF /* Picture.jpg */,
 				31C686CA15C476490075B924 /* AppDelegate.h */,
 				31C686CB15C476490075B924 /* AppDelegate.m */,
 				31C686CD15C476490075B924 /* ViewController.h */,
@@ -124,6 +131,10 @@
 				31C686C215C476490075B924 /* Supporting Files */,
 				31BEE65315C4993C0000B4FF /* UIView+translate.h */,
 				31BEE65415C4993C0000B4FF /* UIView+translate.m */,
+				31FF7A1615C5EADE00260FDF /* MatrixController.h */,
+				31FF7A1715C5EADF00260FDF /* MatrixController.m */,
+				31FF7A1915C5F31100260FDF /* ObserverSet.h */,
+				31FF7A1A15C5F31100260FDF /* ObserverSet.m */,
 			);
 			path = Affine;
 			sourceTree = "<group>";
@@ -159,6 +170,21 @@
 				31FF7A0415C501F500260FDF /* ShearLocatorView.m */,
 			);
 			name = "Demo View";
+			sourceTree = "<group>";
+		};
+		31FF7A1015C5EA9200260FDF /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				31FF7A1115C5EAA300260FDF /* Matrix.fx.png */,
+				31FF7A1215C5EAA300260FDF /* Matrix.png */,
+				31FF7A1315C5EAA300260FDF /* Matrix@2x.png */,
+				31FF7A0C15C5D56800260FDF /* Locator.png */,
+				31FF7A0D15C5D56800260FDF /* Locator@2x.png */,
+				31FF7A0B15C5D54C00260FDF /* generic-export.jsf */,
+				31FF7A0815C5D50900260FDF /* Locator.fx.png */,
+				31BEE64A15C48A300000B4FF /* Picture.jpg */,
+			);
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +243,8 @@
 				31BEE64B15C48A300000B4FF /* Picture.jpg in Resources */,
 				31FF7A0E15C5D56800260FDF /* Locator.png in Resources */,
 				31FF7A0F15C5D56800260FDF /* Locator@2x.png in Resources */,
+				31FF7A1415C5EAA700260FDF /* Matrix.png in Resources */,
+				31FF7A1515C5EAA700260FDF /* Matrix@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +264,8 @@
 				31BEE65515C4993C0000B4FF /* UIView+translate.m in Sources */,
 				31FF79F915C4EE2100260FDF /* Model.m in Sources */,
 				31FF7A0515C501F500260FDF /* ShearLocatorView.m in Sources */,
+				31FF7A1815C5EADF00260FDF /* MatrixController.m in Sources */,
+				31FF7A1B15C5F31200260FDF /* ObserverSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,9 +4,10 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 */
 
 #import "Model.h"
+#import "ObserverSet.h"
 
 @implementation Model {
-    NSCountedSet *observers_;
+    ObserverSet *observers_;
     BOOL allowsScalingDidChange_ : 1;
     BOOL allowsShearingDidChange_ : 1;
     BOOL preset0DidChange_ : 1;
@@ -22,17 +23,18 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 
     _preset0 = CGAffineTransformIdentity;
     _preset1 = CGAffineTransformIdentity;
-    observers_ = [NSCountedSet set];
+    observers_ = [ObserverSet new];
+    observers_.protocol = @protocol(ModelObserver);
 
     return self;
 }
 
 - (void)addModelObserver:(id<ModelObserver>)observer {
-    [observers_ addObject:[NSValue valueWithNonretainedObject:observer]];
+    [observers_ addObserverObject:observer];
 }
 
 - (void)removeModelObserver:(id<ModelObserver>)observer {
-    [observers_ removeObject:[NSValue valueWithNonretainedObject:observer]];
+    [observers_ removeObserverObject:observer];
 }
 
 - (CGAffineTransform)interpolatedTransform {
@@ -99,22 +101,12 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 
 #pragma mark - Implementation details
 
-- (void)forEachObserverRespondingToSelector:(SEL)selector do:(void (^)(id<ModelObserver> observer))block {
-    for (NSValue *value in observers_) {
-        id<ModelObserver> observer = [value nonretainedObjectValue];
-        if ([observer respondsToSelector:selector]) {
-            block(observer);
-        }
-    }
-}
-
 - (void)notifyObservers {
     BOOL interpolatedTransformDidChange = interpolationAbscissaDidChange_ || preset0DidChange_ || preset1DidChange_;
+    id<ModelObserver> proxy = observers_.proxy;
+
     if (interpolatedTransformDidChange) {
-        CGAffineTransform transform = [self interpolatedTransform];
-        [self forEachObserverRespondingToSelector:@selector(model:didChangeInterpolatedTransform:) do:^(id<ModelObserver> observer) {
-            [observer model:self didChangeInterpolatedTransform:transform];
-        }];
+        [proxy model:self didChangeInterpolatedTransform:self.interpolatedTransform];
     }
 
     preset0DidChange_ = NO;
@@ -122,23 +114,17 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     
     if (allowsScalingDidChange_) {
         allowsScalingDidChange_ = NO;
-        [self forEachObserverRespondingToSelector:@selector(model:didChangeAllowsScaling:) do:^(id<ModelObserver> observer) {
-            [observer model:self didChangeAllowsScaling:_allowsScaling];
-        }];
+        [proxy model:self didChangeAllowsScaling:_allowsScaling];
     }
 
     if (allowsShearingDidChange_) {
         allowsShearingDidChange_ = NO;
-        [self forEachObserverRespondingToSelector:@selector(model:didChangeAllowsShearing:) do:^(id<ModelObserver> observer) {
-            [observer model:self didChangeAllowsShearing:_allowsShearing];
-        }];
+        [proxy model:self didChangeAllowsShearing:_allowsShearing];
     }
 
     if (interpolationAbscissaDidChange_) {
         interpolationAbscissaDidChange_ = NO;
-        [self forEachObserverRespondingToSelector:@selector(model:didChangeInterpolationAbscissa:) do:^(id<ModelObserver> observer) {
-            [observer model:self didChangeInterpolationAbscissa:_interpolationAbscissa];
-        }];
+        [proxy model:self didChangeInterpolationAbscissa:_interpolationAbscissa];
     }
 }
 
