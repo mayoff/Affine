@@ -24,6 +24,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     IBOutlet UISwitch *allowShearingSwitch_;
     IBOutlet UISwitch *allowScalingSwitch_;
     IBOutlet UISegmentedControl *imageFillControl_;
+    IBOutlet UISegmentedControl *interpolationTypeControl_;
     BOOL updateControlsIsPending_ : 1;
 }
 
@@ -63,6 +64,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     model_.allowsShearing = allowShearingSwitch_.on;
     model_.allowsScaling = allowScalingSwitch_.on;
     model_.interpolationAbscissa = interpolationSlider_.value;
+    model_.interpolationType = (InterpolationType)interpolationTypeControl_.selectedSegmentIndex;
 }
 
 - (void)setControlsNeedUpdating {
@@ -77,6 +79,7 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
     allowScalingSwitch_.on = model_.allowsScaling;
     allowShearingSwitch_.on = model_.allowsShearing;
     interpolationSlider_.value = model_.interpolationAbscissa;
+    interpolationTypeControl_.selectedSegmentIndex = model_.interpolationType;
 }
 
 - (IBAction)demoViewWasDoubleTapped:(id)sender {

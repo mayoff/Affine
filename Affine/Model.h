@@ -5,6 +5,12 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    InterpolationType_Rectangular,
+    InterpolationType_Polar,
+    InterpolationType_SmartPolar
+} InterpolationType;
+
 @protocol ModelObserver;
 
 @interface Model : NSObject
@@ -18,6 +24,8 @@ Copyright (c) 2012 Rob Mayoff. All rights reserved.
 - (void)setCurrentPresetToTransform:(CGAffineTransform)transform;
 
 @property (nonatomic) CGFloat interpolationAbscissa; // between 0 and 1 inclusive
+
+@property (nonatomic) InterpolationType interpolationType;
 
 @property (nonatomic, readonly) CGAffineTransform interpolatedTransform;
 

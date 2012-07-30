@@ -70,6 +70,7 @@
 		31FF7A1715C5EADF00260FDF /* MatrixController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatrixController.m; sourceTree = "<group>"; };
 		31FF7A1915C5F31100260FDF /* ObserverSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverSet.h; sourceTree = "<group>"; };
 		31FF7A1A15C5F31100260FDF /* ObserverSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverSet.m; sourceTree = "<group>"; };
+		31FF7A1C15C632C900260FDF /* PolarVector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PolarVector.h; path = ../PolarVector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +154,7 @@
 		31FF79FB15C4F01100260FDF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				31FF7A1C15C632C900260FDF /* PolarVector.h */,
 				31FF79F715C4EE2100260FDF /* Model.h */,
 				31FF79F815C4EE2100260FDF /* Model.m */,
 			);
