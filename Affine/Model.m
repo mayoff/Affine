@@ -180,8 +180,17 @@ static inline CGPoint interpolateCGPoints(CGFloat t, CGPoint p0, CGPoint p1) {
 }
 
 static inline PolarVector interpolatePolarVectors(CGFloat t, PolarVector v0, PolarVector v1) {
+    if (v1.a - v0.a < -M_PI) {
+        v1.a += 2 * M_PI;
+    } else if (v1.a - v0.a > M_PI) {
+        v1.a -= 2 * M_PI;
+    }
     CGFloat u = 1.0f - t;
     return (PolarVector){ u * v0.r + t * v1.r, u * v0.a + t * v1.a };
+}
+
+static inline CGPoint interpolateCGPointsViaPolar(CGFloat t, CGPoint p0, CGPoint p1) {
+    return pointFromPolarVector(interpolatePolarVectors(t, PolarVectorFromCGPoint(p0), PolarVectorFromCGPoint(p1)));
 }
 
 - (CGAffineTransform)rectangularInterpolatedTransform {
@@ -195,14 +204,14 @@ static inline PolarVector interpolatePolarVectors(CGFloat t, PolarVector v0, Pol
 
 - (CGAffineTransform)polarInterpolatedTransform {
     CGFloat t = _interpolationAbscissa;
-    CGAffineTransform r;
-    CGPoint *p0 = (CGPoint *)&_preset0;
-    CGPoint *p1 = (CGPoint *)&_preset1;
-    CGPoint *rp = (CGPoint *)&r;
-    rp[0] = pointFromPolarVector(interpolatePolarVectors(t, PolarVectorFromCGPoint(p0[0]), PolarVectorFromCGPoint(p1[0])));
-    rp[1] = pointFromPolarVector(interpolatePolarVectors(t, PolarVectorFromCGPoint(p0[1]), PolarVectorFromCGPoint(p1[1])));
-    rp[2] = interpolateCGPoints(t, p0[2], p1[2]);
-    return r;
+    CGAffineTransform middleStorage;
+    CGPoint *start = (CGPoint *)&_preset0;
+    CGPoint *end = (CGPoint *)&_preset1;
+    CGPoint *middle = (CGPoint *)&middleStorage;
+    middle[0] = interpolateCGPointsViaPolar(t, start[0], end[0]);
+    middle[1] = interpolateCGPointsViaPolar(t, start[1], end[1]);
+    middle[2] = interpolateCGPoints(t, start[2], end[2]);
+    return middleStorage;
 }
 
 static inline CGFloat endAngleToMinimizeRotation(CGFloat startAngle, CGFloat endAngle) {
@@ -212,29 +221,41 @@ static inline CGFloat endAngleToMinimizeRotation(CGFloat startAngle, CGFloat end
         : endAngle;
 }
 
-static inline BOOL signsAreDifferent(CGFloat a, CGFloat b) {
-    return a * b < 0;
+static inline CGFloat addRadians(CGFloat r0, CGFloat r1) {
+    CGFloat r = r0 + r1;
+    if (r < -M_PI) {
+        r += 2 * M_PI;
+    } else if (r > M_PI) {
+        r -= 2 * M_PI;
+    }
+    return r;
+}
+
+static inline CGPoint addPoints(CGPoint lhs, CGPoint rhs) {
+    return CGPointMake(lhs.x + rhs.x, lhs.y + rhs.y);
+}
+
+static inline CGPoint subtractPoints(CGPoint lhs, CGPoint rhs) {
+    return CGPointMake(lhs.x - rhs.x, lhs.y - rhs.y);
+}
+
+static inline PolarVector relativeChord(CGPoint a, CGPoint b) {
+    PolarVector reference = PolarVectorFromCGPoint(a);
+    PolarVector absoluteChord = PolarVectorFromCGPoint(CGPointMake(b.x - a.x, b.y - a.y));
+    return (PolarVector){ absoluteChord.r, addRadians(absoluteChord.a, -reference.a) };
 }
 
 - (CGAffineTransform)smartPolarInterpolatedTransform {
     CGFloat t = _interpolationAbscissa;
-    CGAffineTransform r;
-    CGPoint *p0 = (CGPoint *)&_preset0;
-    CGPoint *p1 = (CGPoint *)&_preset1;
-    CGPoint *rp = (CGPoint *)&r;
-    
-    rp[0] = pointFromPolarVector(interpolatePolarVectors(t, PolarVectorFromCGPoint(p0[0]), PolarVectorFromCGPoint(p1[0])));
+    PolarAffineTransform start = PolarAffineTransformFromAffineTransform(_preset0);
+    PolarAffineTransform end = PolarAffineTransformFromAffineTransform(_preset1);
+    PolarAffineTransform middle;
 
-    PolarVector chord0 = PolarVectorFromCGPoint(CGPointMake(p0[1].x - p0[0].x, p0[1].y - p0[0].y));
-    PolarVector chord1 = PolarVectorFromCGPoint(CGPointMake(p1[1].x - p1[0].x, p1[1].y - p1[0].y));
-    chord1.a = endAngleToMinimizeRotation(chord0.a, chord1.a);
-    PolarVector chord = interpolatePolarVectors(t, chord0, chord1);
-    CGPoint chordPoint = pointFromPolarVector(chord);
-    rp[1].x = rp[0].x + chordPoint.x;
-    rp[1].y = rp[0].y + chordPoint.y;
+    middle.u = interpolatePolarVectors(t, start.u, end.u);
+    middle.v = interpolatePolarVectors(t, start.v, end.v);
+    middle.t = interpolateCGPoints(t, start.t, end.t);
 
-    rp[2] = interpolateCGPoints(t, p0[2], p1[2]);
-    return r;
+    return affineTransformFromPolarAffineTransform(middle);
 }
 
 @end
